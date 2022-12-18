@@ -99,7 +99,7 @@ class Fetcher {
   }
 }
 
-const invoiceFetcher = new Fetcher("invoice.json");
+const invoiceFetcher = new Fetcher("data/invoice.json");
 const invoice = await invoiceFetcher.get();
 
 // const ex1 = new beforeRefactoring();
