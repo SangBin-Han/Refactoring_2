@@ -1,0 +1,8 @@
+{
+  "customer": "한상빈",
+  "orders": [
+    { "amount": 100 },
+    { "amount": 200 },
+    { "amount": 300 }
+  ]
+}
