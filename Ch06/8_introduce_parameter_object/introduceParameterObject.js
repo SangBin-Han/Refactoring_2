@@ -52,7 +52,7 @@ class NumberRange {
   contains(arg) {return (arg >= this.min && arg <= this.max);}
 }
 
-function ex2() {
+function refactoring1() {
   function readingsOutsideRange(station, range) {
     return station.readings
       .filter(r => !range.contains(r.temp));
