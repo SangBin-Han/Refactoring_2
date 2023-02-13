@@ -27,7 +27,7 @@
  * 6. 변수 인라인하기(6.4절)로 임시 변수를 제거한다.
  */
 
-class Order_ex {
+class Order_Ex {
   constructor(quantity, item) {
     this._quantity = quantity;
     this._item = item;
