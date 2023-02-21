@@ -7,7 +7,7 @@
  *    names.push(i.name);
  * }
  * 
- * * --------------- Refactoring ------------------
+ * --------------- Refactoring ------------------
  * 
  * const names = input
  *  .filter(i => i.job === "programmer")
