@@ -28,11 +28,14 @@ function ex() {
 
 function refactoring() {
   if (summer())
-    charge = quantity * plan.summerRate;
+    charge = summerCharge();
   else
     charge = quantity * plan.regularRate + plan.regularServiceCharge;
 }
 
 function summer() {
   return !acquireData_ex.isBefore(plan.summerStart) && !acquireData_ex.isAfter(plan.summerEnd);
+}
+function summerCharge() {
+  return quantity * plan.summerRate;
 }
