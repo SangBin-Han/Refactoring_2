@@ -30,7 +30,7 @@ function refactoring() {
   if (summer())
     charge = summerCharge();
   else
-    charge = quantity * plan.regularRate + plan.regularServiceCharge;
+    charge = regularCharge();
 }
 
 function summer() {
@@ -38,4 +38,7 @@ function summer() {
 }
 function summerCharge() {
   return quantity * plan.summerRate;
+}
+function regularCharge() {
+  return quantity * plan.regularRate + plan.regularServiceCharge;
 }
