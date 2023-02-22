@@ -59,9 +59,8 @@ function and_ex() {
 
 // --------------- Refactoring ------------------
 
-function and_ex() {
-  if (anEmployee.onVacation)
-    if (anEmployee.seniority > 10)
-      return 1;
+function and() {
+  if ((anEmployee.onVacation)
+    && (anEmployee.seniority > 10)) return 1;
   return 0.5;
 }
