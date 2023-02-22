@@ -25,19 +25,19 @@ function ex() {
       return "알 수 없다";
   }
 }
-class EuropeanSwallow {
+class EuropeanSwallow_ex {
   get plumage() {
     return "보통이다";
   }
   // ...
 }
-class AfricanSwallow {
+class AfricanSwallow_ex {
   get plumage() {
     return (this.numberOfCoconuts > 2) ? "지쳤다" : "보통이다";
   }
   // ...
 }
-class NorwegianBlueParrot {
+class NorwegianBlueParrot_ex {
   get plumage() {
     return (this.voltage > 100) ? "그을렸다" : "예쁘다";
   }
@@ -92,11 +92,24 @@ function speeds(birds) {
 }
 
 function plumage(bird) { // 깃털 상태
-  return new Bird(bird).plumage;
+  return createBird(bird).plumage;
 }
 
 function airSpeedVelocity(bird) { // 비행속도
-  return new Bird(bird).airSpeedVelocity;
+  return createBird(bird).airSpeedVelocity;
+}
+
+function createBird(bird) {
+  switch (bird.type) {
+    case '유럽 제비':
+      return new EuropeanSwallow(bird);
+    case '아프리카 제비':
+      return new AfricanSwallow(bird);
+    case '노르웨이 파랑 앵무':
+      return new NorwegianBlueParrot(bird);
+    default: 
+      return new Bird(bird);
+  }
 }
 
 class Bird {
@@ -129,4 +142,16 @@ class Bird {
         return null;
     }
   }
+}
+
+class EuropeanSwallow extends Bird {
+
+}
+
+class AfricanSwallow extends Bird {
+
+}
+
+class NorwegianBlueParrot extends Bird {
+
 }
