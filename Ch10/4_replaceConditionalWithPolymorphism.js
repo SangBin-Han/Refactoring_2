@@ -234,7 +234,6 @@ class Rating { // 함수들을 Rating 클래스로 묶었다.
     let result = 1;
     if (this.history.length < 5) result +=4;
     result += this.history.filter(v => v.profit < 0).length;
-    if (this.voyage.zone === "중국" && this.hasChinaHistory) result -= 2;
     return Math.max(result, 0);
   }
   
@@ -261,7 +260,10 @@ class Rating { // 함수들을 Rating 클래스로 묶었다.
 }
 
 class ExperiencedChinaRating extends Rating {
-
+  get captainHistoryRisk() { // 선장의 항해 이력 위험요소
+    const result = super.captainHistoryRisk - 2;
+    return Math.max(result, 0);
+  }
 }
 
 const voyage = {zone: "서인도", length: 10};
