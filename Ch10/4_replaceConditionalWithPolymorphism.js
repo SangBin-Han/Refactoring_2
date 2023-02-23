@@ -199,7 +199,13 @@ function voyageProfitFactor(voyage, history) { // 수익 요인
 // --------------- Refactoring ------------------
 
 function rating(voyage, history) { // 투자등급
-  return new Rating(voyage, history).value;
+  return createRating(voyage, history).value;
+}
+
+function createRating(voyage, history) {
+  if (voyage.zone === "중국" && history.some(v => "중국" === v.zone))
+    return new ExperiencedChinaRating(voyage, history);
+  else return new Rating(voyage, history);
 }
 
 class Rating { // 함수들을 Rating 클래스로 묶었다.
@@ -252,6 +258,10 @@ class Rating { // 함수들을 Rating 클래스로 묶었다.
   get hasChinaHistory() {
     return this.history.some(v => "중국" === v.zone);
   }
+}
+
+class ExperiencedChinaRating extends Rating {
+
 }
 
 const voyage = {zone: "서인도", length: 10};
