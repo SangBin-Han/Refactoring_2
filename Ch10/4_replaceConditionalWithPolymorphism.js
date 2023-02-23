@@ -208,7 +208,7 @@ function createRating(voyage, history) {
   else return new Rating(voyage, history);
 }
 
-class Rating { // 함수들을 Rating 클래스로 묶었다.
+class Rating {
   constructor(voyage, history) {
     this.voyage = voyage;
     this.history = history;
@@ -222,7 +222,7 @@ class Rating { // 함수들을 Rating 클래스로 묶었다.
     else return "B";
   }
 
-  get voyageRisk() { // 항해 경로 위험요소
+  get voyageRisk() {
     let result = 1;
     if (this.voyage.length > 4) result += 2;
     if (this.voyage.length > 8) result += this.voyage.length - 8;
@@ -230,27 +230,25 @@ class Rating { // 함수들을 Rating 클래스로 묶었다.
     return Math.max(result, 0);
   }
   
-  get captainHistoryRisk() { // 선장의 항해 이력 위험요소
+  get captainHistoryRisk() {
     let result = 1;
     if (this.history.length < 5) result +=4;
     result += this.history.filter(v => v.profit < 0).length;
     return Math.max(result, 0);
   }
   
-  get voyageProfitFactor() { // 수익 요인
+  get voyageProfitFactor() {
     let result = 2;
     if (this.voyage.zone === "중국") result += 1;
     if (this.voyage.zone === "동인도") result += 1;
-    if (this.voyage.zone === "중국" && this.hasChinaHistory) {
-      result += 3;
-      if (this.history.length > 10) result += 1;
-      if (this.voyage.length > 12) result += 1;
-      if (this.voyage.length > 18) result -= 1;
-    }
-    else {
-      if (this.history.length > 8) result += 1;
-      if (this.voyage.length > 14) result -= 1;
-    }
+    result += this.voyageAndHistoryLengthFactor
+    return result;
+  }
+
+  get voyageAndHistoryLengthFactor() {
+    let result = 0;
+    if (this.history.length > 8) result += 1;
+    if (this.voyage.length > 14) result -= 1;
     return result;
   }
 
@@ -260,9 +258,17 @@ class Rating { // 함수들을 Rating 클래스로 묶었다.
 }
 
 class ExperiencedChinaRating extends Rating {
-  get captainHistoryRisk() { // 선장의 항해 이력 위험요소
+  get captainHistoryRisk() {
     const result = super.captainHistoryRisk - 2;
     return Math.max(result, 0);
+  }
+  get voyageAndHistoryLengthFactor() {
+    let result = 0;
+    result += 3;
+    if (this.history.length > 10) result += 1;
+    if (this.voyage.length > 12) result += 1;
+    if (this.voyage.length > 18) result -= 1;
+    return result;
   }
 }
 
