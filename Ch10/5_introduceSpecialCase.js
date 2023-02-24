@@ -74,10 +74,17 @@ class Site {
   get customer() {return this._customer;}
 }
 class Customer {
+  get isUnknown() {return false;}
   get name() {}
   get billingPlan() {}
   set billingPlan(arg) {}
   get paymentHistory() {}
+}
+// 최상위
+function createUnknownCustomer() {
+  return {
+    isUnknown: true,
+  }
 }
 // 클라이언트1
 const aCustomer2 = site.customer;
