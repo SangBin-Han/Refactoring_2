@@ -104,3 +104,44 @@ const plan = aCustomer2.billingPlan;
 
 // 클라이언트3
 const weeksDelinquent = aCustomer2.paymentHistory.weeksDelinquentInLastYear;
+
+// --------------- 예시3: 변환 함수 이용하기 ------------------
+
+const jsonFile = {
+  name: "애크미 보스턴",
+  location: "Malden MA",
+  // 더 많은 현장(site) 정보
+  customer: {
+    name: "애크미 산업",
+    billingPlan: "plan-451",
+    paymentHistory: {
+      weekDelinquentInLastYear: 7
+    }
+  }
+};
+const UnknownCustomer = {
+  name: "물류창고 15",
+  location: "Malden MA",
+  // 더 많은 현장(site) 정보
+  customer: "미확인 고객",
+};
+function acquireSiteData() {
+  return jsonFile;
+}
+
+// 클라이언트1
+const site = acquireSiteData();
+const aCustomer3 = site.customer;
+let customerName3;
+if (aCustomer3 === "미확인 고객") customerName3 = "거주자";
+else customerName3 = aCustomer3.name;
+
+// 클라이언트2
+const plan3 = (aCustomer === "미확인 고객") ?
+      registry.billingPlans.basic
+      : aCustomer3.billingPlan;
+
+// 클라이언트3
+const weeksDelinquent3 = (aCustomer3 === "미확인 고객") ?
+      0
+      : aCustomer3.paymentHistory.weekDelinquentInLastYear;
