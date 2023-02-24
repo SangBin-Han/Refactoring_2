@@ -41,6 +41,7 @@ class Customer {
 }
 class UnknownCustomer {
   get isUnknown() {return true;}
+  get name() {return "거주자";}
 }
 function isUnknown(arg) {
   if (!((arg instanceof Customer) || arg instanceof UnknownCustomer))
@@ -51,9 +52,7 @@ const aCustomer = site.customer;
 
 function client1() {
   // ... 수많은 코드 ...
-  let customerName;
-  if (isUnknown(aCustomer)) customerName = "거주자";
-  else customerName = aCustomer.name;
+  const customerName = aCustomer.name;
 }
 function client2() {
   const plan = (isUnknown(aCustomer)) ?
