@@ -27,7 +27,9 @@
  */
 
 class Site {
-  get customer() {return this._customer;}
+  get customer() {
+    return (this._customer === "미확인 고객") ? new UnknownCustomer() : this._customer;
+  }
 }
 
 class Customer {
@@ -40,24 +42,28 @@ class Customer {
 class UnknownCustomer {
   get isUnknown() {return true;}
 }
-
+function isUnknown(arg) {
+  if (!((arg instanceof Customer) || (arg === "미확인 고객")))
+    throw new Error(`잘못된 값과 비교: <${arg}>`);
+  return (arg === "미확인 고객");
+}
 function client1() {
   const aCustomer = site.customer;
   // ... 수많은 코드 ...
   let customerName;
-  if (aCustomer === "미확인 고객") customerName = "거주자";
+  if (isUnknown(aCustomer)) customerName = "거주자";
   else customerName = aCustomer.name;
 }
 function client2() {
-  const plan = (aCustomer === "미확인 고객") ?
+  const plan = (isUnknown(aCustomer)) ?
         registry.billingPlans.basic
         : aCustomer.billingPlan;
 }
 function client3() {
-  if (aCustomer !== "미확인 고객") aCustomer.billingPlan = newPlan;
+  if (!isUnknown(aCustomer)) aCustomer.billingPlan = newPlan;
 }
 function client4() {
-  const weeksDelinquent = (aCustomer === "미확인 고객") ?
+  const weeksDelinquent = (isUnknown(aCustomer)) ?
         0
         : aCustomer.paymentsHistory.weeksDelinquentInLastYear;
 }
