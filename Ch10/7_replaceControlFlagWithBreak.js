@@ -28,12 +28,15 @@
  * 3. 모두 수정했다면 제어 플래그를 제거한다.
  */
 function ex() {
+  checkForMiscreants(people);
+}
+function checkForMiscreants(people) {
   let found = false;
   for (const p of people) {
     if (!found) {
       if (p === "조커") {
         sendAlert();
-        found = true;
+        return;
       }
       if (p === "사루만") {
         sendAlert();
