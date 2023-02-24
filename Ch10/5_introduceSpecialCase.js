@@ -26,6 +26,7 @@
  * 8. 아직도 특이 케이스 검사 함수를 이용하는 곳이 남아 있다면 검사 함수를 인라인(6.2절)한다.
  */
 
+// --------------- 예시1 ------------------
 class Site {
   get customer() {
     return (this._customer === "미확인 고객") ? new UnknownCustomer() : this._customer;
@@ -66,3 +67,5 @@ function client4() {
 function alienClient() {
   const name = aCustomer.isUnknown ? "미확인 거주자" : aCustomer.name;
 }
+
+// --------------- 예시2: 객체 리터럴 이용하기 ------------------
