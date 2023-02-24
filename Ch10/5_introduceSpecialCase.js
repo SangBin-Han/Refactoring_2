@@ -31,7 +31,6 @@ class Site {
     return (this._customer === "미확인 고객") ? new UnknownCustomer() : this._customer;
   }
 }
-
 class Customer {
   get name() {} // 고객 이름
   get billingPlan() {} // 요금제
@@ -42,6 +41,8 @@ class Customer {
 class UnknownCustomer {
   get isUnknown() {return true;}
   get name() {return "거주자";}
+  get billingPlan() {return registry.billingPlans.basic;}
+  set billingPlan(arg) {}
 }
 function isUnknown(arg) {
   if (!((arg instanceof Customer) || arg instanceof UnknownCustomer))
@@ -55,12 +56,10 @@ function client1() {
   const customerName = aCustomer.name;
 }
 function client2() {
-  const plan = (isUnknown(aCustomer)) ?
-        registry.billingPlans.basic
-        : aCustomer.billingPlan;
+  const plan = aCustomer.billingPlan;
 }
 function client3() {
-  if (!isUnknown(aCustomer)) aCustomer.billingPlan = newPlan;
+  aCustomer.billingPlan = newPlan;
 }
 function client4() {
   const weeksDelinquent = (isUnknown(aCustomer)) ?
