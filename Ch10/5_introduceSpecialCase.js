@@ -84,6 +84,7 @@ class Customer {
 function createUnknownCustomer() {
   return {
     isUnknown: true,
+    name: "거주자",
   }
 }
 function isUnknown(arg) {
@@ -91,9 +92,7 @@ function isUnknown(arg) {
 }
 // 클라이언트1
 const aCustomer2 = site.customer;
-let customerName;
-if (isUnknown(aCustomer2)) customerName = "거주자";
-else customerName = aCustomer2.name;
+const customerName = aCustomer2.name;
 
 // 클라이언트2
 const plan = (isUnknown(aCustomer2)) ?
