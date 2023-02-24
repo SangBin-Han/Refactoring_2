@@ -141,7 +141,14 @@ if (isUnknown(aCustomer3)) customerName3 = "거주자";
 else customerName3 = aCustomer3.name;
 
 function enrichSite(inputSite) {
-  return _.cloneDeep(inputSite);
+  const result = _.cloneDeep(inputSite);
+  const unknownCustomer = {
+    isUnknown: true,
+  };
+
+  if (isUnknown(result.customer)) result.customer = unknownCustomer;
+  else result.customer.isUnknown = false;
+  return result;
 }
 // 클라이언트2
 const plan3 = (isUnknown(aCustomer3)) ?
