@@ -85,6 +85,7 @@ function createUnknownCustomer() {
   return {
     isUnknown: true,
     name: "거주자",
+    billingPlan: registry.billingPlans.basic,
   }
 }
 function isUnknown(arg) {
@@ -95,9 +96,7 @@ const aCustomer2 = site.customer;
 const customerName = aCustomer2.name;
 
 // 클라이언트2
-const plan = (isUnknown(aCustomer2)) ?
-      registry.billingPlans.basic
-      : aCustomer2.billingPlan;
+const plan = aCustomer2.billingPlan;
 
 // 클라이언트3
 const weeksDelinquent = (isUnknown(aCustomer2)) ?
