@@ -43,12 +43,13 @@ class UnknownCustomer {
   get isUnknown() {return true;}
 }
 function isUnknown(arg) {
-  if (!((arg instanceof Customer) || (arg === "미확인 고객")))
+  if (!((arg instanceof Customer) || arg instanceof UnknownCustomer))
     throw new Error(`잘못된 값과 비교: <${arg}>`);
-  return (arg === "미확인 고객");
+  return arg.isUnknown;
 }
+const aCustomer = site.customer;
+
 function client1() {
-  const aCustomer = site.customer;
   // ... 수많은 코드 ...
   let customerName;
   if (isUnknown(aCustomer)) customerName = "거주자";
