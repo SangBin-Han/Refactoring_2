@@ -129,21 +129,25 @@ function acquireSiteData() {
   return jsonFile;
 }
 function isUnknown(aCustomer) {
-  return aCustomer === "미확인 고객";
+  if (aCustomer === "미확인 고객") return true;
+  else return aCustomer.isUnknown;
 }
 
 // 클라이언트1
 const rawSite = acquireSiteData();
 const site = enrichSite(rawSite);
 const aCustomer3 = site.customer;
-let customerName3;
-if (isUnknown(aCustomer3)) customerName3 = "거주자";
-else customerName3 = aCustomer3.name;
+const customerName3 = aCustomer3.name;
 
 function enrichSite(inputSite) {
   const result = _.cloneDeep(inputSite);
   const unknownCustomer = {
     isUnknown: true,
+    name: "거주자",
+    billingPlan: registry.billingplans.basic,
+    paymentHistory: {
+      weeksDelinquentInLastYear: 0,
+    }
   };
 
   if (isUnknown(result.customer)) result.customer = unknownCustomer;
@@ -151,11 +155,7 @@ function enrichSite(inputSite) {
   return result;
 }
 // 클라이언트2
-const plan3 = (isUnknown(aCustomer3)) ?
-      registry.billingPlans.basic
-      : aCustomer3.billingPlan;
+const plan3 = aCustomer3.billingPlan;
 
 // 클라이언트3
-const weeksDelinquent3 = (isUnknown(aCustomer3)) ?
-      0
-      : aCustomer3.paymentHistory.weekDelinquentInLastYear;
+const weeksDelinquent3 = aCustomer3.paymentHistory.weekDelinquentInLastYear;
