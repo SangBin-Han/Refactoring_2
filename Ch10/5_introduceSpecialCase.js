@@ -32,11 +32,11 @@ class Site {
   }
 }
 class Customer {
+  get isUnknown() {return false;}
   get name() {} // 고객 이름
   get billingPlan() {} // 요금제
   set billingPlan(arg) {}
   get paymentsHistory() {} // 납부 이력
-  get isUnknown() {return false;}
 }
 class UnknownCustomer {
   get isUnknown() {return true;}
@@ -47,11 +47,6 @@ class UnknownCustomer {
 }
 class NullPaymentHistory {
   get weekDelinquentInLastYear() {return 0;}
-}
-function isUnknown(arg) {
-  if (!((arg instanceof Customer) || arg instanceof UnknownCustomer))
-    throw new Error(`잘못된 값과 비교: <${arg}>`);
-  return arg.isUnknown;
 }
 const aCustomer = site.customer;
 
@@ -67,4 +62,7 @@ function client3() {
 }
 function client4() {
   const weeksDelinquent = aCustomer.paymentsHistory.weeksDelinquentInLastYear;
+}
+function alienClient() {
+  const name = aCustomer.isUnknown ? "미확인 거주자" : aCustomer.name;
 }
