@@ -35,6 +35,10 @@ class Customer {
   get billingPlan() {} // 요금제
   set billingPlan(arg) {}
   get paymentsHistory() {} // 납부 이력
+  get isUnknown() {return false;}
+}
+class UnknownCustomer {
+  get isUnknown() {return true;}
 }
 
 function client1() {
