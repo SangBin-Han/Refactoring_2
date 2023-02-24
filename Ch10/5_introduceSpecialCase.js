@@ -71,7 +71,7 @@ function alienClient() {
 // --------------- 예시2: 객체 리터럴 이용하기 ------------------
 
 class Site {
-  get customer() {return this._customer;}
+  get customer() {return (this._customer === "미확인 고객") ? createUnknownCustomer() : this._customer;}
 }
 class Customer {
   get isUnknown() {return false;}
@@ -87,7 +87,7 @@ function createUnknownCustomer() {
   }
 }
 function isUnknown(arg) {
-  return (arg === "미확인 고객");
+  return arg.isUnknown;
 }
 // 클라이언트1
 const aCustomer2 = site.customer;
