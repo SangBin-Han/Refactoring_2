@@ -69,3 +69,28 @@ function alienClient() {
 }
 
 // --------------- 예시2: 객체 리터럴 이용하기 ------------------
+
+class Site {
+  get customer() {return this._customer;}
+}
+class Customer {
+  get name() {}
+  get billingPlan() {}
+  set billingPlan(arg) {}
+  get paymentHistory() {}
+}
+// 클라이언트1
+const aCustomer2 = site.customer;
+let customerName;
+if (aCustomer === "미확인 고객") customerName = "거주자";
+else customerName = aCustomer2.name;
+
+// 클라이언트2
+const plan = (aCustomer2 === "미확인 고객") ?
+      registry.billingPlans.basic
+      : aCustomer2.billingPlan;
+
+// 클라이언트3
+const weeksDelinquent = (aCustomer2 === "미확인 고객") ?
+      0
+      : aCustomer2.paymentHistory.weeksDelinquentInLastYear;
