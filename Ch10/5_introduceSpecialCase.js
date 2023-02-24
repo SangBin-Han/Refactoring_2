@@ -69,6 +69,7 @@ function alienClient() {
 }
 
 // --------------- 예시2: 객체 리터럴 이용하기 ------------------
+// 리터럴을 이런 식으로 사용하려면 불변으로 만들어야 한다(freeze() 메서드를 이용하면 된다).
 
 class Site {
   get customer() {return (this._customer === "미확인 고객") ? createUnknownCustomer() : this._customer;}
@@ -86,6 +87,9 @@ function createUnknownCustomer() {
     isUnknown: true,
     name: "거주자",
     billingPlan: registry.billingPlans.basic,
+    paymentHistory: {
+      weeksDelinquentInLastYear: 0,
+    }
   }
 }
 function isUnknown(arg) {
@@ -99,6 +103,4 @@ const customerName = aCustomer2.name;
 const plan = aCustomer2.billingPlan;
 
 // 클라이언트3
-const weeksDelinquent = (isUnknown(aCustomer2)) ?
-      0
-      : aCustomer2.paymentHistory.weeksDelinquentInLastYear;
+const weeksDelinquent = aCustomer2.paymentHistory.weeksDelinquentInLastYear;
