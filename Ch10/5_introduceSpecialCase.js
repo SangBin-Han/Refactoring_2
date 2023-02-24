@@ -128,20 +128,27 @@ const UnknownCustomer = {
 function acquireSiteData() {
   return jsonFile;
 }
+function isUnknown(aCustomer) {
+  return aCustomer === "미확인 고객";
+}
 
 // 클라이언트1
-const site = acquireSiteData();
+const rawSite = acquireSiteData();
+const site = enrichSite(rawSite);
 const aCustomer3 = site.customer;
 let customerName3;
-if (aCustomer3 === "미확인 고객") customerName3 = "거주자";
+if (isUnknown(aCustomer3)) customerName3 = "거주자";
 else customerName3 = aCustomer3.name;
 
+function enrichSite(inputSite) {
+  return _.cloneDeep(inputSite);
+}
 // 클라이언트2
-const plan3 = (aCustomer === "미확인 고객") ?
+const plan3 = (isUnknown(aCustomer3)) ?
       registry.billingPlans.basic
       : aCustomer3.billingPlan;
 
 // 클라이언트3
-const weeksDelinquent3 = (aCustomer3 === "미확인 고객") ?
+const weeksDelinquent3 = (isUnknown(aCustomer3)) ?
       0
       : aCustomer3.paymentHistory.weekDelinquentInLastYear;
