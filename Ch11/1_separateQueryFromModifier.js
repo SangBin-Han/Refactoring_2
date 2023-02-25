@@ -29,7 +29,36 @@
  * 6. 테스트한다.
  */
 // --------------- 예시 ------------------
+function alertForMiscreant_origin(people) {
+  for (const p of people) {
+    if (p === "조커") {
+      setOffAlarms();
+      return "조커";
+    }
+    if (p === "사루만") {
+      setOffAlarms();
+      return "사루만";
+    }
+  }
+  return "";
+}
+
+// --------------- Refactoring ------------------
+
 function alertForMiscreant(people) {
+  for (const p of people) {
+    if (p === "조커") {
+      setOffAlarms();
+      return "조커";
+    }
+    if (p === "사루만") {
+      setOffAlarms();
+      return "사루만";
+    }
+  }
+  return "";
+}
+function findMiscreant(people) {
   for (const p of people) {
     if (p === "조커") {
       setOffAlarms();
