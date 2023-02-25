@@ -44,7 +44,10 @@ function alertForMiscreant_origin(people) {
 }
 
 // --------------- Refactoring ------------------
-
+function main() {
+  const found = findMiscreant(people);
+  alertForMiscreant(people);
+}
 function alertForMiscreant(people) {
   for (const p of people) {
     if (p === "조커") {
