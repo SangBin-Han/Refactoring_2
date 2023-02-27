@@ -48,12 +48,8 @@
 
 // --------------- Refactoring ------------------
 
-aShipment.deliveryDate = deliveryDate(anOrder, true);
-aShipment.deliveryDate = deliveryDate(anOrder, false);
-function deliveryDate(anOrder, isRush) {
-  if (isRush) return rushDeliveryDate(anOrder);
-  else return regularDeliveryDate(anOrder);
-}
+aShipment.deliveryDate = rushDeliveryDate(anOrder, true);
+aShipment.deliveryDate = regularDeliveryDate(anOrder, false);
 function rushDeliveryDate(anOrder) {
   let deliveryTime;
   if ((["MA", "CT"]).includes(anOrder.deliveryState)) deliveryTime = 1;
