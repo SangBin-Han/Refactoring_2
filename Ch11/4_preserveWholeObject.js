@@ -22,9 +22,21 @@
  */
 // --------------- 예시1 ------------------
 // 호출자
-const low = aRoom.daysTempRange.low;
-const high = aRoom.daysTempRange.high;
-if (!aPlan.withinRange(low, high))
+// const low = aRoom.daysTempRange.low;
+// const high = aRoom.daysTempRange.high;
+// if (!aPlan.withinRange(low, high))
+//   alerts.push("방 온도가 지정 범위를 벗어났습니다.");
+
+// class HeatingPlan {
+//   withinRange(bottom, top) {
+//     return (bottom >= this._temperatureRange.low)
+//           && (top <= this._temperatureRange.high);
+//   }
+// }
+
+// --------------- Refactoring ------------------
+
+if (!aPlan.withinRange(aRoom.daysTempRange))
   alerts.push("방 온도가 지정 범위를 벗어났습니다.");
 
 class HeatingPlan {
@@ -32,4 +44,29 @@ class HeatingPlan {
     return (bottom >= this._temperatureRange.low)
           && (top <= this._temperatureRange.high);
   }
+  withinRange(aNumberRange) {
+    return (aNumberRange.low >= this._temperatureRange.low)
+          && (aNumberRange.high <= this._temperatureRange.high);
+  }
+}
+
+// --------------- 예시2: 새 함수를 다른 방식으로 만들기 ------------------
+// 호출자
+// const low = aRoom.daysTempRange.low;
+// const high = aRoom.daysTempRange.high;
+// if (!aPlan.withinRange(low, high))
+//   alerts.push("방 온도가 지정 범위를 벗어났습니다.");
+
+// --------------- Refactoring ------------------
+
+const tempRange = aRoom.daysTempRange;
+const isWithinRange = aPlan.xxNEWwithinRange(tempRange);
+if (!isWithinRange)
+  alerts.push("방 온도가 지정 범위를 벗어났습니다.");
+
+function xxNEWwithinRange(tempRange) {
+  const low = tempRange.low;
+  const high = tempRange.high;
+  const isWithinRange = this.withinRange(low, high);
+  return isWithinRange;
 }
